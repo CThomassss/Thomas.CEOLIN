@@ -1,0 +1,972 @@
+
+  /**
+   * Préparatif Couleurs, Ombre, style de texte, transition ... 
+   */
+
+
+
+:root {
+
+  /**
+   * couleurs
+   */
+
+   --gris : hsl(240, 10%, 70%);
+   --jaune: hsl(50, 100%, 54%);
+   --bleu1: hsl(196, 84%, 63%);
+   --Bleu2: hsl(231, 83%, 25%);
+   --jaune2: hsl(50, 100%, 64%);
+   --violet1: hsl(225, 24%, 27%);
+   --orange: hsl(7, 96%, 61%);
+   --bleu5: hsl(243, 23%, 18%);
+   --rose: hsl(353, 83%, 65%);
+   --bleufoncé: hsl(230, 80%, 39%);
+   --bleuclair2: hsl(222, 88%, 55%);
+   --bleuclair3: hsl(230, 52%, 63%);
+   --grisclair: hsl(254, 7%, 65%);
+   --orangeclair: hsl(22, 92%, 47%);
+   --noir: hsl(0, 0%, 0%);
+   --blanc: hsl(0, 0%, 100%);
+
+  /**
+   * Style du Texte 
+   */
+
+  --ff-open-sans: 'Open Sans', sans-serif;
+  --ff-barlow: 'Barlow', sans-serif;
+  --ff-poppins: 'Poppins', sans-serif;
+
+  --fs-1: 3.5rem;
+  --fs-2: 3rem;
+  --fs-3: 2.4rem;
+  --fs-4: 2rem;
+  --fs-5: 1.8rem;
+  --fs-6: 1.3rem;
+
+  --fw-600: 600;
+  --fw-700: 700;
+
+  /**
+   * bordure raddié 
+   */
+
+  --radius-5: 5px;
+  --radius-10: 10px;
+  --radius-15: 15px;
+  --radius-20: 20px;
+
+  /**
+   * espacemment 
+   */
+
+  --section-padding: 60px;
+
+  /**
+   * Ombre 
+   */
+
+  --shadow: 0 -5px 10px var(--grisclair);
+
+  /**
+   * transition
+   */
+
+  --transition-1: 0.05s ease;
+  --transition-2: 0.25s ease;
+  --cubic-out: cubic-bezier(0.33, 0.85, 0.56, 1.02);
+
+}
+
+
+
+
+
+  /**
+   * fin de la préparation 
+   */
+
+
+
+
+
+
+/*-----------------------------------*\
+  # j'initie tout les préparatif pour que ce soit plus simple 
+\*-----------------------------------*/
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li { list-style: none; }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a,
+img,
+span,
+input,
+strong,
+button,
+textarea,
+ion-icon { display: block; }
+
+img { height: auto; }
+
+ion-icon {
+  pointer-events: none;
+  color: var(--blanc);
+}
+
+button,
+input,
+textarea {
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+button { cursor: pointer; }
+
+input,
+textarea { width: 100%; }
+
+address { font-style: normal; }
+
+html {
+  font-size: 10px;
+  font-family: var(--ff-open-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bleu5);
+  color: var(--gris);
+  font-size: 1.6rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+:focus-visible { outline-offset: 4px; }
+
+::-webkit-scrollbar { width: 15px; }
+
+::-webkit-scrollbar-track { background-color: hsl(0, 0%, 95%); }
+
+::-webkit-scrollbar-thumb { background-color: hsl(0, 0%, 80%); }
+
+::-webkit-scrollbar-thumb:hover { background-color: hsl(0, 0%, 70%); }
+
+
+.container { padding-inline: 20px; }
+
+.btn {
+  color: var(--blanc);
+  font-family: var(--ff-barlow);
+  font-size: var(--fs-5);
+  font-weight: var(--fw-600);
+  max-width: max-content;
+  padding: var(--padding, 10px 40px);
+  border-radius: 50px;
+  transition: var(--transition-2);
+}
+
+.btn-primary.blue { background-color: var(--bleufoncé); }
+
+.btn-primary.blue:is(:hover, :focus) { background-color: var(--orange); }
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.section { padding-block: var(--section-padding); }
+
+.section-subtitle {
+  color: var(--orange);
+  font-family: var(--ff-barlow);
+  font-size: var(--fs-4);
+  text-align: center;
+}
+
+.h2,
+.h3 {
+  color: var(--blanc);
+  font-family: var(--ff-barlow);
+  font-weight: var(--fw-600);
+  line-height: 1.3;
+}
+
+.h2 { font-size: var(--fs-2); }
+
+.h3 { font-size: var(--fs-3); }
+
+.section-title,
+.section-text { text-align: center; }
+
+
+/*-----------------------------------*\
+  # FIN DE TOUT LES PREPARATIF 
+\*-----------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-----------------------------------*/
+/* EN TETE                           */
+/*-----------------------------------*/
+
+.entete {
+  position: fixed;
+  padding-block: 15px;
+  width: 100%;
+  background-color: var(--blanc);
+  height: 65px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: 0.25s var(--cubic-out);
+  z-index: 4;
+}
+
+.entete.nav-active {
+  height: 335px;
+  transition-duration: 0.35s;
+}
+
+.entete > .container {
+  display: flex;
+  justify-content: center; /* Centrer les éléments */
+  align-items: center;
+}
+
+.logo {
+  color: var(--blanc);
+  font-family: var(--ff-poppins);
+  font-size: 3.4rem;
+  margin-right: 90px; /* Ajout de marge à droite */
+}
+
+.nav-toggle-btn { font-size: 3rem; }
+
+.nav-toggle-btn .close-icon,
+.nav-toggle-btn.active .menu-icon { display: none; }
+
+.nav-toggle-btn.active .close-icon,
+.nav-toggle-btn .menu-icon { display: block; }
+
+.navbar {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  width: 100%;
+  padding-inline: 20px;
+  visibility: hidden;
+  opacity: 0;
+  transition: var(--transition-2);
+}
+
+.entete.nav-active .navbar {
+  visibility: visible;
+  opacity: 1;
+}
+
+.navbar-link {
+  font-size: 2rem; /* Augmenter la taille de la police */
+  padding: 10px 20px; /* Augmenter la taille de la zone de clic/tap */
+  transition: var(--transition-1);
+}
+
+.navbar-link:hover, 
+.navbar-link:focus {
+  font-size: 2rem; /* Augmenter la taille de la police au survol/focus */
+  padding: 11px 21px; /* Augmenter la taille de la zone de clic/tap */
+}
+
+.navbar .btn {
+  background-color: var(--orange);
+  margin-block-start: 15px;
+}
+
+.nav-toggle-btn { display: none; }
+
+.entete,
+.entete.nav-active {
+  background-color: transparent;
+  box-shadow: none;
+  height: unset;
+  padding-block: 30px;
+}
+
+.entete.active {
+  background-color: var(--bleu5);
+  box-shadow: var(--shadow);
+  padding-block: 20px;
+}
+
+.navbar { all: unset; }
+
+.navbar-list {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navbar .btn {
+  margin-block-start: 0;
+  --padding: 7px 30px;
+}
+
+
+
+/* Mode Nuit/Jour */
+.toggle-mode {
+  /* ... autres styles ... */
+  justify-content: flex-end; /* Centrer le bouton à droite */
+}
+
+/* Bouton de mode nuit/jour */
+.toggle-mode {
+  position: fixed;
+  top: 33px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  z-index: 1100; /* Assure que le bouton reste au-dessus de tout */
+
+}
+
+/* Styles pour le mode jour */
+body:not(.dark-mode) {
+  background-color: var(--violet1);
+  color: #000; /* couleur du texte noir */
+}
+
+body:not(.dark-mode) .entete {
+  background-color: var(--violet1); /* couleur de la barre de navigation */
+}
+
+body:not(.dark-mode) .navbar-link {
+  color: var(--blanc); /* couleur du texte des liens de navigation */
+}
+
+body:not(.dark-mode) .toggle-mode {
+  background-color: #333; /* couleur du bouton de mode nuit */
+  color: var(--blanc); /* couleur du texte du bouton de mode nuit */
+}
+
+/* Styles pour le mode nuit */
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark-mode .entete {
+  background-color: #222;
+}
+
+body.dark-mode .navbar-link {
+  color: #ddd;
+}
+
+body.dark-mode .toggle-mode {
+  background-color: #141111;
+  color: #333;
+}
+
+/*-----------------------------------*\
+  #Principale
+\*-----------------------------------*/
+
+#apropos {
+  margin-block-start: 10px;
+}
+
+.elem,
+.rotate-img { 
+  display: none; 
+}
+
+.Principale {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding-block: 100px var(--section-padding);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row; /* Pour aligner le contenu horizontalement */
+  align-items: center; /* Pour centrer le contenu verticalement */
+  justify-content: center; /* Pour séparer le contenu avec l'espace disponible entre eux */
+  
+}
+
+.Principale-banner {
+  border-radius: var(--radius-10);
+  padding: 20px; /* Ajout de rembourrage pour un espace interne */
+  margin-right: 50px; /* Espacement entre l'image et le texte */
+  margin-left: 5cm; /* Espacement entre l'image et le texte ( a changé si on veut absolutmennt ) */
+}
+
+.Principale-banner img { 
+  width: 130%; /* Ajustement pour que l'image s'étende sur toute la largeur de son conteneur */
+  height: auto; /* Pour conserver les proportions */
+  border-radius: inherit; 
+  display: block; /* Assurez-vous que l'image soit traitée comme un bloc pour appliquer la marge */
+}
+
+.Principale-content {
+  text-align: left;
+  color: var(--blanc);
+  flex: 1; /* Permet au contenu de prendre tout l'espace disponible */
+}
+
+.Principale-title {
+  font-family: 'Arial', sans-serif;
+  font-size: 4.6rem;
+  font-weight: var(--fw-700);
+  line-height: 1.3;
+  margin-block-end: 14px;
+}
+
+.Principale-title strong {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-700);
+  margin-block-end: 8px;
+  font-size: 6rem; /* Ajustez cette valeur selon vos besoins */
+}
+
+.Principale-text { 
+  margin-block-start: 20px;
+  margin-block-end: 50px; /* Augmentation de l'espacement entre le texte et le bas */
+  font-weight: bold; /* Mise en gras du texte */
+  font-size: 2.2rem; /* Augmentez cette valeur selon vos besoins */
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 200px; /* Augmentation de l'espacement entre les boutons */
+  
+}
+
+.btn-group .btn[href="#apropos"] {
+  background-color: rgb(167, 45, 150);
+  color: rgb(255, 255, 255); /* Pour rendre le texte lisible sur le fond rose */
+  font-family: 'Arial', sans-serif;
+}
+
+.btn-group .btn[href="#contact"] {
+  background-color: rgb(10, 17, 112);
+  color: rgb(255, 255, 255); /* Pour rendre le texte lisible sur le fond rose */
+  font-family: 'Arial', sans-serif;
+}
+
+/*-----------------------------------*\
+  #apropos
+\*-----------------------------------*/
+
+#portfolio {
+  margin-block-start: 300px;
+}
+
+.apropos { 
+  padding: var(--section-padding) 0; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.lang-icon {
+  width: 12000px;
+  height: 1000px;
+  margin: 6px; /* Ajustement de la marge pour rapprocher les icônes */
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--violet1);
+
+}
+
+.apropos-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--section-padding); /* Espacement en haut de la figure */
+  font-family: 'Arial', sans-serif;
+}
+
+.apropos-banner .btn {
+  font-size: 2rem; /* Ou toute autre taille que vous préférez */
+  font-family: 'Arial', sans-serif;
+}
+
+
+.apropos-content {
+  text-align: center;
+  color: var(--blanc);
+  margin-bottom: 20px;
+
+}
+
+.apropos-title {
+  font-family: var(--ff-barlow);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-700);
+  margin-bottom: 20px;
+}
+
+.apropos-text { 
+  font-size: var(--fs-4);
+  line-height: 10.8;
+  margin-bottom: 20px;
+}
+
+.section-subtitle {
+  font-size: 5.3rem;
+  font-weight: var(--fw-700);
+}
+
+.btn {
+  color: var(--blanc);
+  font-family: var(--ff-barlow);
+  font-size: var(--fs-5);
+  font-weight: var(--fw-600);
+  padding: 10px 40px;
+  border-radius: var(--radius-20);
+  transition: var(--transition-2);
+  background-color: var(--bleufoncé);
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background-color: var(--orange);
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 500px;
+}
+
+.image-container img {
+  max-width: 450px;
+  height: auto;
+  margin-block-end: 50px;
+  border-radius: 10px; /* Pour des coins arrondis avec un rayon de 15 pixels */
+}
+
+/* Augmentation de la marge entre le titre et le premier paragraphe */
+.apropos-content .section-title {
+  margin-bottom: var(--section-padding); /* Utilisation de la variable de padding de section pour l'espacement */
+}
+
+/* Augmentation de la distance entre l'image et le texte */
+.apropos-content .image-container {
+  margin-bottom: calc(var(--section-padding) * 2); /* Utilisation de la variable de padding de section pour l'espacement */
+}
+
+.apropos-content .section-text {
+  font-size: 2rem; /* ou toute autre taille que vous préférez */
+  font-family: 'Arial', sans-serif;
+}
+
+
+
+/*-----------------------------------*\
+  # FIN DE LA SECTION A PROPOS
+\*-----------------------------------*/
+
+/*-----------------------------------*\
+  #PORTFOLIO
+\*-----------------------------------*/
+
+.portfolio .section-subtitle {
+  font-size: 55px; /* Exemple de taille pour le sous-titre */
+}
+
+.portfolio .section-title { 
+  margin-block-end: 18px;
+  color: var(--blanc); 
+  font-size: 32px; /* Exemple de taille pour le titre */
+}
+
+.portfolio .section-text { 
+  margin-block-end: 80px;
+  color: var(--blanc); 
+  font-size: 23px; /* Exemple de taille pour le texte de section */
+}
+
+.portfolio-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px; 
+  
+}
+
+.portfolio-card {
+  background-color: var(--soft-gray);
+  padding: 80px 15px;
+  border-radius: 15px; /* Pour des coins arrondis avec un rayon de 15 pixels */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  font-size: 18px; /* Exemple de taille pour le sous-titre de carte */
+}
+
+.portfolio-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  font-size: 20px; /* Exemple de taille pour le titre de carte */
+}
+
+.portfolio-card .card-subtitle {
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  margin-block-end: 10px;
+}
+
+.portfolio-card .card-title,
+.portfolio-card .card-subtitle,
+.portfolio-card .btn-link span {
+  color: var(--blanc); 
+}
+
+.portfolio-card .card-title {
+  max-width: 25ch;
+  font-size: 2rem;
+  margin-block-end: 25px;
+}
+
+.portfolio-card .btn-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+}
+
+.portfolio-card .btn-link ion-icon {
+  color: var(--accent-color);
+  font-size: 2rem;
+}
+
+.portfolio .btn-link span {
+  font-size: 18px; /* Exemple de taille pour le texte du bouton */
+  font-family: 'Arial', sans-serif;
+}
+
+
+
+
+
+/*-----------------------------------*\
+  #COMPETENCE
+\*-----------------------------------*/
+
+#portfolio {
+  margin-block-end: 300px;
+}
+
+#contact {
+  margin-block-start: 300px;
+}
+
+.competence {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  margin-block-end: 50px;
+}
+
+.competence .section-title { 
+  margin-block-end: 100px;
+}
+
+.competence .section-text { 
+  margin-block-end: 70px;
+  text-align: center;
+  font-size: var(--fs-4);
+  color: var(--blanc);
+}
+
+.competence-list {
+  display: grid;
+  grid-template-columns: repeat(3); /* Deux colonnes */
+  gap: 25px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.competence-item .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 20px;
+  border-radius: var(--radius-10);
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  line-height: 1.3;
+}
+
+.competence-item .wrapper:hover {
+  transform: translateY(-5px);
+}
+
+.competence-title,
+.competence-data {
+  color: var(--blanc);
+  font-size: var(--fs-5);  /* Augmentez cette valeur pour augmenter la taille de la police */
+  font-family: var(--ff-barlow);
+  font-weight: var(--fw-600);
+  text-align: center;
+}
+
+.competence-progress-box {
+  background-color: var(--blanc);
+  height: 25px; /* Augmentez cette valeur pour augmenter la hauteur */
+  border-radius: var(--radius-10);
+  width: 100%;
+  overflow: hidden;
+}
+
+.competence-progress {
+  background-color: var(--bleufoncé);
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.5s ease-in-out;
+}
+
+
+/*-----------------------------------*\
+  #CONTACT
+\*-----------------------------------*/
+
+#competence {
+  margin-block-end: 300px;
+}
+
+#blog {
+  margin-block-start: 300px;
+}
+
+.contact-card {
+  background-image: url('/portfolio-master/assets/images/fond\ blanc\ contact.avif');
+  background-size: cover; /* Assurez-vous que l'image couvre tout l'élément */
+  background-position: center; /* Centrez l'image */
+  padding: 50px 25px;
+  border-radius: var(--radius-20);
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 1400px; /* Limitez la largeur maximale */
+  margin: 0 auto; /* Centrez la carte horizontalement */
+  font-family: 'Arial', sans-serif;
+}
+
+.contact-card .card-subtitle {
+  color: var(--noir);
+  font-family: var(--ff-open-sans);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-600);
+  margin-block-end: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.contact .section-title {
+  text-align: center;
+  margin-block-end: 50px;
+  font-size: var(--fs-3);
+  color: var(--noir);
+  font-family: 'Arial', sans-serif;
+}
+
+.contact-form { 
+  margin-block-end: 50px; 
+  
+}
+
+.contact-input {
+  background-color: var(--blanc);
+  color: var(--grisclair);
+  border-radius: var(--radius-10); /* Arrondir davantage les coins */
+  padding: 15px 25px;
+  font-size: var(--fs-5);
+  margin-block-end: 25px; /* Augmenter l'espacement pour une meilleure lisibilité */
+  border: 1px solid var(--grisclair); /* Ajouter une bordure subtile */
+}
+
+.contact-input::placeholder { 
+  color: var(--grisclair); /* Ajuster la couleur du placeholder pour une meilleure visibilité */
+}
+
+textarea.contact-input {
+  resize: vertical;
+  min-height: 120px; /* Ajustement de la hauteur minimale */
+  height: auto;
+  max-height: 300px;
+  padding-top: 15px; /* Espacement pour le texte */
+  font-family: 'Arial', sans-serif;
+}
+
+.btn-submit {
+  background-color: var(--noir);
+  color: var(--blanc);
+  font-family: var(--ff-barlow);
+  font-size: var(--fs-5);
+  width: 100%;
+  padding: 12px; /* Ajustement du rembourrage pour une meilleure taille */
+  border-radius: var(--radius-10); /* Arrondir davantage les coins */
+  transition: var(--transition-2);
+  cursor: pointer; /* Ajouter un indicateur de survol */
+}
+
+.btn-submit:hover {
+  background-color: var(--bleuclair3); /* Changer la couleur au survol */
+  color: var(--blanc);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-block-end: 20px; /* Espacement entre les éléments */
+}
+
+.contact-icon {
+  background-color: var(--bleuclair3);
+  font-size: 2.6rem; /* Légère augmentation de la taille de l'icône */
+  padding: 22px; /* Ajustement du rembourrage */
+  border-radius: 50%;
+  color: var(--blanc); /* Changer la couleur de l'icône */
+}
+
+.contact-item-title {
+  color: var(--noir); /* Changer la couleur du titre */
+  font-family: var(--ff-barlow);
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+}
+
+.contact-item-link { 
+  transition: var(--transition-1); 
+  color: var(--noir); /* Changer la couleur du lien */
+}
+
+.contact-item-link:hover, 
+.contact-item-link:focus { 
+  color: var(--bleuclair3); /* Changer la couleur au survol/focus */
+}
+
+
+
+
+/*-----------------------------------*\
+  #BLOG
+\*-----------------------------------*/
+
+.blog { 
+  padding-block-end: 120px;
+  color: var(--blanc); /* Ajout de la couleur blanche pour tout le texte */
+}
+
+.blog .section-title { margin-block-end: 120px; }
+
+
+
+.blog-list {
+  display: grid;
+  gap: 40px;
+}
+
+.blog-card { font-family: var(--ff-barlow); }
+
+.blog-card .card-banner {
+  background-color: var(--independence);
+  border-radius: var(--radius-15);
+  overflow: hidden;
+  margin-block-end: 20px;
+}
+
+.blog-card .card-banner img {
+  transition: var(--transition-2);
+  max-width: 800px; 
+  max-height: 1000px; 
+}
+
+.blog-card .card-banner a:is(:hover, :focus) img { transform: scale(1.1); }
+
+.blog-card .card-banner:focus-within {
+  outline: 2px solid var(--blanc);
+  outline-offset: 4px;
+}
+
+.blog-card .card-tag {
+  color: var(--blanc);
+  margin-block-end: 5px;
+  font-size: 1.9rem;
+}
+
+.blog-card .card-title {
+  color: var(--blanc);
+  font-weight: var(--fw-600);
+  line-height: 2.3;
+  font-size: 1.9rem;
+
+}
+
+.blog-card .card-title a { transition: var(--transition-2); }
+
+.blog-card .card-title a:is(:hover, :focus) { color: var(--orange-soda); }
+
+
+@media (min-width: 992px) {
+
+.blog-list {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+}
+
+.blog { padding-block-end: 180px; }
+
+.blog-list {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+}
+
